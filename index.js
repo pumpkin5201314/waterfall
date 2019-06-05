@@ -1,69 +1,4 @@
-
-// var oLi = $('li');
-// var num = 1;
-// var flag = false;
-
-//获取数据
-// getData();
-// function getData() {
-    
-//         $.ajax({
-//             type: 'GET',
-//             url: './data.txt',
-//             success: addDom,
-//             //  beforeSend: function () {
-//             //     $('.loading').show();
-//             // },
-//         });
-// }
-
-// function addDom(data) {
-//      $('.loading').hide();
-//       var dataList = JSON.parse(data);
-//       console.log(dataList)
-//     if (dataList.length > 0) {
-//         dataList.forEach(function (ele, index) {
-//             var iDiv = $('<div class="item"></div>');
-//             var imgBox = $('<div class="imgBox"></div>');
-//             var oImg = new Image();
-//             var oP = $('<p></p>');
-//             oP.text(ele.title);
-//             oImg.src = ele.preview;
-//             oImg.onload = function () {
-//                 imgBox.append(oImg);
-//                 iDiv.append(imgBox).append(oP);
-//                 var index = getMinList(oLi);
-//                 $(oLi[index]).append(iDiv);
-//             }
-//         })
-//     }
-//     flag = false;
-//  };
-
-// function getMinList(dom) {
-//     var minHeight = parseInt($(dom[0]).css('height')),
-//         index = 0;
-//     for (var i = 1; i < dom.length; i++) {
-//         var h = parseInt($(dom[i]).css('height'));
-//         if (h < minHeight) {
-//             minHeight = h;
-//             index = i;
-//         }
-//     }
-//     console.log(index)
-//     return index;
-// };
-
-// $(window).scroll(function () {
-//     var scrollHeight = $(this).scrollTop();
-//     var clientHeight = $(window).height();
-//     var pageHeigh = parseInt($(oLi[getMinList(oLi)]).css('height'));
-//     if (scrollHeight + clientHeight > pageHeigh) {
-//         getData();
-//     }
-// })
-
-
+ 
 
 
 function getData(){
@@ -72,23 +7,29 @@ function getData(){
 
 }
 var oLi=document.getElementsByClassName("col");
+  // var oImgBox=document.getElementsByClassName("imgBox")
 //渲染页面
 function renderDom(data){
 	data=typeof data ==="string" ? JSON.parse(data):data;
 	console.log(data);
      data.forEach(function(ele,index){
+          
      		var minIndex = getMinli();
      		var itemDom = addDom(ele);
+
      		oLi[minIndex].innerHTML+=itemDom;
-     		
+     		  console.log( ele.height*200/ele.width)
+
+     		 
 
      })
 }
 
 
 function addDom(data){
+	var oHight=parseInt(data.height*200/data.width)+"px"
 	var dom='<div class="item">\
-                    <div class="imgBox">\
+                    <div class="imgBox" style="height:'+ oHight+'">\
                         <img src="'+ data.image+'" alt="">\
                     </div>\
                     <p>'+data.title+'</p>\
